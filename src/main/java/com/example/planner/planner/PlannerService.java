@@ -1,6 +1,6 @@
 package com.example.planner.planner;
 
-import com.example.planner.planner.entities.Graph;
+//import com.example.planner.planner.entities.Graph;
 import com.example.planner.planner.entities.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +25,12 @@ public class PlannerService {
         return this.repository.findAll();
     }
 
+    public Task addTask(Task t) {
+        return this.repository.save(t);
+    }
 
-    public Task getDefinition(String word) {
-        return this.repository.findByWord(word).get(0);
+    public Task updateTask(Task t) {
+        return this.repository.save(t);
     }
 
 

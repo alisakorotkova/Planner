@@ -53,7 +53,7 @@ public class MainController implements Initializable {
                 if (!cell.isEmpty()) {
                     try {
                         Task d = (Task) listViewVertex.getSelectionModel().getSelectedItem();
-                        this.definitionSelected(e, d);
+                        this.taskSelected(e, d);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -63,23 +63,30 @@ public class MainController implements Initializable {
             return cell;
         });
     }
-    public void definitionSelected(MouseEvent mouseEvent, Task selectedItem) throws IOException {
+
+
+    // TODO: сохраним Scene, которую мы прямо сейчас редактируем, чтобы
+    // ее можно было обновить или сохранить
+
+    EditTaskScene currentEditTaskScene = null;
+
+    public void taskSelected(MouseEvent mouseEvent, Task selectedItem) throws IOException {
+
+        // if we long to save currently edited Task, we do it here
+
         EditTaskScene card = new EditTaskScene();
+        this.currentEditTaskScene = card;
         card.setEditTask(selectedItem);
         this.scenes.getChildren().clear();
         this.scenes.getChildren().add(card);
     }
 
 
-
-
-
-
-
     public void btnAddVertPressed(ActionEvent actionEvent) throws IOException {
         System.out.println("btnAddVert was pressed");
+        this.taskSelected(null, new Task());
 
-        this.tasks.add(new Task(8));
+        //this.tasks.add(new Task(8));
 //        Task t = this.plannerService.addTask();
 //        this.tasks.add(t);
 

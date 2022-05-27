@@ -1,9 +1,6 @@
 package com.example.planner.planner.entities;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +13,27 @@ public class Task {
      * ...
      */
 
-    @javax.persistence.Id
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
+    String label = "Без названия";
+
+    public Task() {}
+
+    Task(String label) {
+        this.label = label;
+    }
+
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
 
     @OneToMany(mappedBy = "sourceTask")
     private List<TaskEdge> outgoingTaskEdges;
