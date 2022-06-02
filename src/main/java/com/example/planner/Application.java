@@ -1,6 +1,9 @@
 package com.example.planner;
 
 import com.example.planner.planner.PlannerService;
+import com.example.planner.planner.entities.Task;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,6 +19,8 @@ public class Application extends javafx.application.Application {
     public static PlannerService plannerService;
 
     private static ConfigurableApplicationContext context;
+
+    public static final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
 
     @Override

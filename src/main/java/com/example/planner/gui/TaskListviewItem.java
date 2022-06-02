@@ -30,6 +30,6 @@ public class TaskListviewItem extends HBox {
         //this.labelVertIndex.setText(task.getInd());
         this.labelVertName.setText(task.getLabel());
         //this.labelVertIn.setText(task.getInd());
-        this.labelVertOut.setText(task.getLabel());
+        //this.labelVertOut.setText(task.getLabel());
     }
 }

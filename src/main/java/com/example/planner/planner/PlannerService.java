@@ -15,8 +15,6 @@ public class PlannerService {
     @Autowired
     private TaskRepository repository;
 
-
-
     public PlannerService() {
 
     }
@@ -32,9 +30,6 @@ public class PlannerService {
     public Task updateTask(Task t) {
         return this.repository.save(t);
     }
-
-
-
     }
 
 

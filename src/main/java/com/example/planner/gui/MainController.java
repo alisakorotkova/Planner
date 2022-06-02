@@ -28,7 +28,8 @@ public class MainController implements Initializable {
 
 
     PlannerService plannerService = com.example.planner.Application.plannerService;
-    final ObservableList<Task> tasks = FXCollections.observableArrayList();
+    final ObservableList<Task> tasks = com.example.planner.Application.tasks;
+    //final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

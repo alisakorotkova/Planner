@@ -17,7 +17,7 @@ public class Task {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    String label = "Без названия";
+    public String label = "Без названия";
 
     public Task() {}
 
