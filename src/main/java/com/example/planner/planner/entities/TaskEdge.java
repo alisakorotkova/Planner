@@ -15,7 +15,7 @@ public class TaskEdge {
 
     }
 
-    TaskEdge(Task source, Task target) {
+    public TaskEdge(Task source, Task target) {
         this.sourceTask = source;
         this.targetTask = target;
     }
