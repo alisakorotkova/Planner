@@ -43,8 +43,14 @@
                      <Font name="Monospaced Bold" size="14.0" />
                   </font>
                </Button>
-               <ListView fx:id="lwIngoing" layoutX="39.0" layoutY="95.0" prefHeight="142.0" prefWidth="190.0" />
-               <ListView fx:id="lwOutgoing" layoutX="328.0" layoutY="95.0" prefHeight="142.0" prefWidth="190.0" />
+
+            <HBox fx:id="edgesContainer">
+
+            </HBox>
+
+<!--               <ListView fx:id="lwIngoing" layoutX="39.0" layoutY="95.0" prefHeight="142.0" prefWidth="190.0" />-->
+<!--               <ListView fx:id="lwOutgoing" layoutX="328.0" layoutY="95.0" prefHeight="142.0" prefWidth="190.0" />-->
+
                <Label fx:id="labelEdge1" layoutX="87.0" layoutY="72.0" prefHeight="23.0" prefWidth="94.0" text="входящие" textAlignment="CENTER" textFill="#2a2a32">
                   <font>
                      <Font name="Monospaced Regular" size="18.0" />
