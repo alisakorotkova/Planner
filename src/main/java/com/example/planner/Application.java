@@ -20,8 +20,6 @@ public class Application extends javafx.application.Application {
 
     private static ConfigurableApplicationContext context;
 
-    public static final ObservableList<Task> tasks = FXCollections.observableArrayList();
-
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -34,6 +32,12 @@ public class Application extends javafx.application.Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        //context.close();
     }
 
     public static void main(String[] args) {

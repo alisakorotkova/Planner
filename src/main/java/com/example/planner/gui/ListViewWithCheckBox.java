@@ -17,16 +17,16 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.util.List;
+import java.util.Set;
 
 public class ListViewWithCheckBox extends ListView {
 
-    private ObservableList<Task> items = FXCollections.observableArrayList();
-
     private boolean forIngoingTasks;
 
-    ListViewWithCheckBox(boolean forIngoingTasks) {
+    ListViewWithCheckBox(boolean forIngoingTasks, Task currentTask) {
 
         this.forIngoingTasks = forIngoingTasks;
+        this.currentTask = currentTask;
 
         super.setCellFactory(CheckBoxListCell.forListView(new Callback<Item, ObservableValue<Boolean>>() {
             @Override
@@ -41,42 +41,63 @@ public class ListViewWithCheckBox extends ListView {
 
     private Task currentTask;
 
-    public void setCurrentTask(Task t) {
-        this.currentTask = t;
-    }
+    //public void setCurrentTask(Task t) {
+//        this.currentTask = t;
+//    }
 
     public void update() {
 
+        this.getItems().clear();
+
         List<Task> tasks = Application.plannerService.getAllTasks();
+        Long currentTaskId = currentTask.getId();
+
+        Set<Long> forbiddenTasks;
+        if (forIngoingTasks) {
+            forbiddenTasks = Application.plannerService.getForbiddenIngoingTasks(currentTaskId);
+        } else {
+            forbiddenTasks = Application.plannerService.getForbiddenOutgoingTasks(currentTaskId);
+        }
 
         for (int i = 0; i < tasks.size(); i++) {
 
-            Item item = new Item(tasks.get(i).getLabel(), false);
-            item.setTask(tasks.get(i));
+            Item item;
 
-            // observe item's on property and display message if it changes:
+            boolean isSelected;
+            if (forIngoingTasks) {
+                isSelected = Application.plannerService.taskIsIngoingTo(currentTaskId, tasks.get(i).getId());
+            } else {
+                isSelected = Application.plannerService.taskIsOutgoingTo(currentTaskId, tasks.get(i).getId());
+            }
+
+            if ((!forbiddenTasks.contains(tasks.get(i).getId()) || isSelected) && (tasks.get(i).getId() != currentTaskId)) {
+                item = new Item(tasks.get(i).getLabel(), isSelected);
+                item.setTask(tasks.get(i));
+            } else {
+                continue;
+            }
+
             item.onProperty().addListener((obs, wasOn, isNowOn) -> {
-                //System.out.println(item.getName() + " changed on state from " + wasOn + " to " + isNowOn);
-
                 if (this.forIngoingTasks) {
                     if (isNowOn == true) {
-                        Application.plannerService.addIngoingTask(this.currentTask, item.task);
+                        Application.plannerService.addIngoingTask(currentTaskId, item.task.getId());
                     } else {
-                        Application.plannerService.removeIngoingTask(this.currentTask, item.task);
+                        Application.plannerService.removeIngoingTask(currentTaskId, item.task.getId());
                     }
                 } else {
                     if (isNowOn == true) {
-                        Application.plannerService.addOutgoingTask(this.currentTask, item.task);
+                        Application.plannerService.addOutgoingTask(currentTaskId, item.task.getId());
                     } else {
-                        Application.plannerService.removeOutgoingTask(this.currentTask, item.task);
+                        Application.plannerService.removeOutgoingTask(currentTaskId, item.task.getId());
                     }
                 }
 
+                update();
                 //Application.plannerService.updateTask(this.currentTask);
 
             });
 
-            super.getItems().add(item);
+            this.getItems().add(item);
         }
     }
 

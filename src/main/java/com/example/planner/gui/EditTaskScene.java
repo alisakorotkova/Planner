@@ -14,12 +14,6 @@ import javafx.util.Callback;
 
 public class EditTaskScene extends HBox {
 
-//    @FXML
-//    TextField textEdgeFrom;
-//
-//    @FXML
-//    TextField textEdgeTo;
-
     @FXML
     TextField textAddingName;
 
@@ -28,12 +22,6 @@ public class EditTaskScene extends HBox {
 
     @FXML
     Button btnAdd;
-
-//    @FXML
-//    ListView lwIngoing;
-//
-//    @FXML
-//    ListView lwOutgoing;
 
     @FXML
     HBox edgesContainer;
@@ -49,8 +37,6 @@ public class EditTaskScene extends HBox {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
         this.textAddingName.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -79,9 +65,11 @@ public class EditTaskScene extends HBox {
         // TODO: proceed with filling this scene
         this.textAddingName.setText(s.getLabel());
 
-        ListViewWithCheckBox x = new ListViewWithCheckBox(true);
-        x.setCurrentTask(currentTask);
-        this.edgesContainer.getChildren().add(x);
+        ListViewWithCheckBox ingoingListView = new ListViewWithCheckBox(true, currentTask);
+        this.edgesContainer.getChildren().add(ingoingListView);
+
+        ListViewWithCheckBox outgoingListView = new ListViewWithCheckBox(false, currentTask);
+        this.edgesContainer.getChildren().add(outgoingListView);
 
 
 

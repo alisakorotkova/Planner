@@ -1,5 +1,8 @@
 package com.example.planner.planner.entities;
 
+import com.example.planner.Application;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,25 +16,26 @@ public class TaskEdge {
 
     }
 
-    public TaskEdge(Task source, Task target) {
-        this.sourceTask = source;
-        this.targetTask = target;
+    public TaskEdge(Long sourceId, Long targetId) {
+        this.sourceTaskId = sourceId;
+        this.targetTaskId = targetId;
     }
 
-    @ManyToOne()
-    @JoinColumn(name = "source_id")
-    private Task sourceTask;
+    //@ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name = "source_id")
+    private Long sourceTaskId;
 
-    @ManyToOne()
-    @JoinColumn(name = "target_id")
-    private Task targetTask;
+    //@ManyToOne(fetch = FetchType.EAGER)
+    //@JoinColumn(name = "target_id")
+    private Long targetTaskId;
+
 
     public Task getSourceTask() {
-        return sourceTask;
+        return Application.plannerService.getTaskById(sourceTaskId);
     }
 
     public Task getTargetTask() {
-        return targetTask;
+        return Application.plannerService.getTaskById(targetTaskId);
     }
 
 }

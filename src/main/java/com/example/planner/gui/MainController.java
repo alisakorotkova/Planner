@@ -1,9 +1,13 @@
 package com.example.planner.gui;
 
+import com.example.planner.Application;
 import com.example.planner.planner.PlannerService;
 import com.example.planner.planner.entities.Task;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.TransformationList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,6 +21,35 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+abstract class UiThreadList<T> extends TransformationList<T, T> {
+    public UiThreadList(ObservableList<? extends T> source) {
+        super(source);
+    }
+
+    @Override
+    protected void sourceChanged(ListChangeListener.Change<? extends T> change) {
+        Platform.runLater(() -> fireChange(change));
+    }
+
+    @Override
+    public int getSourceIndex(int index) {
+        return index;
+    }
+
+    @Override
+    public T get(int index) {
+        return getSource().get(index);
+    }
+
+    @Override
+    public int size() {
+        return getSource().size();
+    }
+}
+
+
+
 public class MainController implements Initializable {
 
 
@@ -26,16 +59,16 @@ public class MainController implements Initializable {
     public ListView listViewVertex;
     public Label name;
 
+    final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
-    PlannerService plannerService = com.example.planner.Application.plannerService;
-    final ObservableList<Task> tasks = com.example.planner.Application.tasks;
-    //final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        Application.plannerService.notifyController(this);
+
         this.listViewVertex.setItems(tasks);
-        this.tasks.addAll(this.plannerService.getAllTasks());
+        this.tasks.addAll(Application.plannerService.getAllTasks());
 
         this.listViewVertex.setCellFactory(lv -> {
             ListCell<Task> cell = new ListCell<Task>() {
@@ -43,6 +76,7 @@ public class MainController implements Initializable {
                 protected void updateItem(Task item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty) {
+                        setGraphic(null);
                         return;
                     }
                     TaskListviewItem c = new TaskListviewItem();
@@ -85,7 +119,10 @@ public class MainController implements Initializable {
 
     public void btnAddVertPressed(ActionEvent actionEvent) throws IOException {
         System.out.println("btnAddVert was pressed");
-        this.taskSelected(null, new Task());
+        Task t = Application.plannerService.addTask(new Task("Без названия"));
+        initiateUpdate();
+        this.taskSelected(null, t);
+
 
         //this.tasks.add(new Task(8));
 //        Task t = this.plannerService.addTask();
@@ -100,6 +137,42 @@ public class MainController implements Initializable {
 
     public void btnSortPressed(ActionEvent actionEvent) {
         System.out.println("btnSort was pressed");
+    }
+
+    public void initiateUpdate() {
+
+        tasks.clear();
+        tasks.addAll(Application.plannerService.getAllTasks());
+
+//        Platform.runLater(() -> {
+//            //listViewVertex.getItems().clear();
+//
+//            listViewVertex.refresh();
+//            listViewVertex.setItems(FXCollections.observableArrayList());
+//
+//            Platform.runLater(() -> {
+//                listViewVertex.setItems(tasks);
+//
+//            });
+//
+//
+//        });
+//
+//        Thread thread = new Thread(new Runnable() {
+//
+//            @Override
+//            public void run() {
+//
+//
+//
+//
+//            }
+//
+//        });
+//        // don't let thread prevent JVM shutdown
+//        thread.start();
+
+
 
     }
 }

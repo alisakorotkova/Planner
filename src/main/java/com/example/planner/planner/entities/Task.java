@@ -1,11 +1,16 @@
 package com.example.planner.planner.entities;
 
+import com.example.planner.Application;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
+@Transactional
 public class Task {
 
 
@@ -24,9 +29,10 @@ public class Task {
     public String label = "Без названия";
 
     public Task() {
+
     }
 
-    Task(String label) {
+    public Task(String label) {
         this.label = label;
     }
 
@@ -40,29 +46,36 @@ public class Task {
     }
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sourceTask")
-    //@Fetch(value = FetchMode.SUBSELECT)
-    public List<TaskEdge> outgoingTaskEdges;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "targetTask")
-    public List<TaskEdge> ingoingTaskEdges;
 
 
-    List<Task> getIngoingTasks() {
-        ArrayList<Task> r = new ArrayList<>();
-        for (TaskEdge e : this.ingoingTaskEdges) {
-            r.add(e.getTargetTask());
-        }
-        return r;
-    }
 
-    List<Task> getOutgoingTasks() {
-        ArrayList<Task> r = new ArrayList<>();
-        for (TaskEdge e : this.outgoingTaskEdges) {
-            r.add(e.getSourceTask());
-        }
-        return r;
-    }
+//    public Task() {
+//        this.ingoingTaskEdges = new ArrayList<>();
+//        this.outgoingTaskEdges = new ArrayList<>();
+//    }
+
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sourceTask")
+//    //@Fetch(value = FetchMode.SUBSELECT)
+//    public List<TaskEdge> outgoingTaskEdges;
+//
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "targetTask")
+//    public List<TaskEdge> ingoingTaskEdges;
+
+//    List<Task> getIngoingTasks() {
+//        ArrayList<Task> r = new ArrayList<>();
+//        for (TaskEdge e : this.ingoingTaskEdges) {
+//            r.add(e.getTargetTask());
+//        }
+//        return r;
+//    }
+//
+//    List<Task> getOutgoingTasks() {
+//        ArrayList<Task> r = new ArrayList<>();
+//        for (TaskEdge e : this.outgoingTaskEdges) {
+//            r.add(e.getSourceTask());
+//        }
+//        return r;
+//    }
 
 }
 
