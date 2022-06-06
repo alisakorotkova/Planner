@@ -139,6 +139,30 @@ public class PlannerService {
         // TODO: перепиши аналогично, заменяя аутгоинг на ингоинг
         Set<Long> ids = new HashSet<>();
 
+        Queue<Task> ingoing = new LinkedList<>();
+        ingoing.addAll(getIngoingTasks(taskId));
+        Task o = getTaskById(taskId);
+
+        // if we want to detect cycles and delete them
+        // let us save task from which we have found cycle
+        Map<Long, Long> cycleSources = new HashMap<>();
+
+        while (!ingoing.isEmpty()) {
+
+            Long prevTaskId = o.getId();
+            o = ingoing.remove();
+            if (!ids.contains(o.getId())) {
+                ids.add(o.getId());
+                for (Task t : getIngoingTasks(o.getId())) {
+                    ingoing.add(t);
+                    cycleSources.put(t.getId(), o.getId());
+                }
+            } else {
+                // Cycle situation
+                removeIngoingTask(cycleSources.get(o.getId()), o.getId());
+                //throw new RuntimeException("Congrats! There is a cycle.");
+            }
+        }
 
         return ids;
     }
@@ -182,6 +206,61 @@ public class PlannerService {
             tasks.add(e.getTargetTask());
         }
         return tasks;
+    }
+
+
+
+
+
+    // --------------------------------
+
+    List<Task> tasksGraph = Application.plannerService.getAllTasks();
+
+    // служебное поле для запоминания посещенных вершин
+    Map<Task, Boolean> visited;
+    ArrayList<Task> answer;
+
+    private void dfs(Task v) {
+
+        this.visited.put(v, true);
+
+        // Для каждой вершины, исходящей из текущей
+        for (Task u : Application.plannerService.getOutgoingTasks(v.getId())) {
+            // Не был ли я в этой вершине? Если не был, то пойдем!
+            if (!this.visited.get(u)) {
+                dfs(u);
+            }
+        }
+        answer.add(v);
+    }
+
+
+
+    public ArrayList<Task> topSort() {
+        System.out.println("TopSorting");
+
+        // проинициализируем мой массив посещений (да / нет)
+        this.visited = new HashMap<>();
+        for (Task u : this.tasksGraph) {
+            this.visited.put(u, false);
+        }
+        // у меня получился Map: false, false, ..., false
+        this.answer = new ArrayList<>();
+
+        // Хочу обойти все компоненты связности графа
+        // Все кусочки, из которых он составлен
+        // Поэтому насильно попробую пойти из каждой вершины
+        for (Task u : this.tasksGraph) {
+            if (!this.visited.get(u)) {
+                dfs(u);
+            }
+        }
+
+        // в answer хранится ответ в перевернутом виде
+        // Разверну и покажу
+
+        Collections.reverse(this.answer);
+        return this.answer;
     }
 
 }
