@@ -137,6 +137,7 @@ public class PlannerService {
 
 
         // TODO: перепиши аналогично, заменяя аутгоинг на ингоинг
+
         Set<Long> ids = new HashSet<>();
 
         Queue<Task> ingoing = new LinkedList<>();
@@ -151,6 +152,7 @@ public class PlannerService {
 
             Long prevTaskId = o.getId();
             o = ingoing.remove();
+
             if (!ids.contains(o.getId())) {
                 ids.add(o.getId());
                 for (Task t : getIngoingTasks(o.getId())) {
@@ -162,6 +164,7 @@ public class PlannerService {
                 removeIngoingTask(cycleSources.get(o.getId()), o.getId());
                 //throw new RuntimeException("Congrats! There is a cycle.");
             }
+
         }
 
         return ids;
@@ -208,13 +211,18 @@ public class PlannerService {
         return tasks;
     }
 
+//    public List<Task> topSorting(List<Task> a){
+//
+//        return
+//    }
+
 
 
 
 
     // --------------------------------
 
-    List<Task> tasksGraph = Application.plannerService.getAllTasks();
+    //List<Task> tasksGraph = Application.plannerService.getAllTasks();
 
     // служебное поле для запоминания посещенных вершин
     Map<Task, Boolean> visited;
@@ -241,7 +249,7 @@ public class PlannerService {
 
         // проинициализируем мой массив посещений (да / нет)
         this.visited = new HashMap<>();
-        for (Task u : this.tasksGraph) {
+        for (Task u : Application.plannerService.getAllTasks()) {
             this.visited.put(u, false);
         }
         // у меня получился Map: false, false, ..., false
@@ -250,7 +258,7 @@ public class PlannerService {
         // Хочу обойти все компоненты связности графа
         // Все кусочки, из которых он составлен
         // Поэтому насильно попробую пойти из каждой вершины
-        for (Task u : this.tasksGraph) {
+        for (Task u : Application.plannerService.getAllTasks()) {
             if (!this.visited.get(u)) {
                 dfs(u);
             }

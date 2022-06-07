@@ -9,13 +9,16 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.TransformationList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 import java.io.IOException;
 import java.net.URL;
@@ -135,8 +138,13 @@ public class MainController implements Initializable {
 //        this.scenes.getChildren().add(scene.getRoot());
     }
 
-    public void btnSortPressed(ActionEvent actionEvent) {
+    public void btnSortPressed(ActionEvent actionEvent) throws IOException {
         System.out.println("btnSort was pressed");
+        this.scenes.getChildren().clear();
+        //FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("topsorting.fxml"));
+        SubScene scene = new SubScene(new TopSortScene(), 130, 220);
+        HBox.setHgrow(scene, Priority.ALWAYS);
+        this.scenes.getChildren().add(scene.getRoot());
     }
 
     public void initiateUpdate() {
