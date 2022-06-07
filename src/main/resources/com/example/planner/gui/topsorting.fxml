@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="570.0" style="-fx-background-color: #F4EBE7 #F4EBE7 #F4EBE7 #F4EBE7;">
+         <top>
+            <Label fx:id="labelPV" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="557.0" style="-fx-background-color: #F4EBE7 #F4EBE7;" text="Порядок Выполнения" textFill="#98b1fc" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Impact" size="40.0" />
+               </font>
+            </Label>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="labelN" layoutX="112.0" layoutY="14.0" prefHeight="25.0" prefWidth="377.0" text="Возможный порядок выполнения задач" textAlignment="CENTER" textFill="#2a2a32" AnchorPane.bottomAnchor="256.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font name="Monospaced Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="lvAnswer" layoutX="67.0" layoutY="54.0" prefHeight="200.0" prefWidth="436.0" style="-fx-background-color: #F4EBE7;" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="54.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</HBox>
+</fx:root>
