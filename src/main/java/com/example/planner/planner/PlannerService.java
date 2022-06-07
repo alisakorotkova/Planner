@@ -4,6 +4,7 @@ package com.example.planner.planner;
 
 import com.example.planner.Application;
 import com.example.planner.gui.MainController;
+import com.example.planner.gui.TopSortScene;
 import com.example.planner.planner.entities.Task;
 import com.example.planner.planner.entities.TaskEdge;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,8 +175,13 @@ public class PlannerService {
     // --------------------------------
 
     MainController c;
+    TopSortScene f;
     public void notifyController(MainController c) {
         this.c = c;
+    }
+
+    public void notifyControllerTS(TopSortScene f) {
+        this.f = f;
     }
 
     private void updateTasks() {

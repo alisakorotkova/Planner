@@ -1,9 +1,18 @@
 package com.example.planner.gui;
 
+import com.example.planner.Application;
+import com.example.planner.planner.entities.Task;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class TopSortScene extends HBox {
 
@@ -20,6 +29,47 @@ public class TopSortScene extends HBox {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    final ObservableList<Task> tasksTS = FXCollections.observableArrayList();
+
+
+    //@Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        Application.plannerService.notifyControllerTS(this);
+
+        this.lvAnswer.setItems(tasksTS);
+        this.tasksTS.addAll(Application.plannerService.topSort());
+
+        this.lvAnswer.setCellFactory(lv -> {
+            ListCell<Task> cell = new ListCell<Task>() {
+                @Override
+                protected void updateItem(Task item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        return;
+                    }
+                    TaskListviewItem c = new TaskListviewItem();
+                    c.setTask(item);
+                    setGraphic(c);
+                }
+            };
+//            cell.setOnMouseClicked(e -> {
+//                if (!cell.isEmpty()) {
+//                    try {
+//                        Task d = (Task) lvAnswer.getSelectionModel().getSelectedItem();
+//                        this.taskSelected(e, d);
+//                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+//                    }
+//                    e.consume();
+//                }
+//            }
+//            );
+            return cell;
+        });
     }
 
 
