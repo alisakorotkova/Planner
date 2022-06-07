@@ -25,32 +25,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-abstract class UiThreadList<T> extends TransformationList<T, T> {
-    public UiThreadList(ObservableList<? extends T> source) {
-        super(source);
-    }
-
-    @Override
-    protected void sourceChanged(ListChangeListener.Change<? extends T> change) {
-        Platform.runLater(() -> fireChange(change));
-    }
-
-    @Override
-    public int getSourceIndex(int index) {
-        return index;
-    }
-
-    @Override
-    public T get(int index) {
-        return getSource().get(index);
-    }
-
-    @Override
-    public int size() {
-        return getSource().size();
-    }
-}
-
 
 
 public class MainController implements Initializable {

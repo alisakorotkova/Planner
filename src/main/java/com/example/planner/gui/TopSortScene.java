@@ -6,15 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class TopSortScene extends HBox {
+public class TopSortScene extends HBox implements Initializable {
 
     @FXML
     ListView lvAnswer;
@@ -34,13 +36,17 @@ public class TopSortScene extends HBox {
     final ObservableList<Task> tasksTS = FXCollections.observableArrayList();
 
 
-    //@Override
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Application.plannerService.notifyControllerTS(this);
 
         this.lvAnswer.setItems(tasksTS);
-        this.tasksTS.addAll(Application.plannerService.topSort());
+        List<Long> ids = Application.plannerService.topSort();
+        for (Long id : ids) {
+            this.tasksTS.add(Application.plannerService.getTaskById(id));
+        }
+
 
         this.lvAnswer.setCellFactory(lv -> {
             ListCell<Task> cell = new ListCell<Task>() {
@@ -52,7 +58,7 @@ public class TopSortScene extends HBox {
                         return;
                     }
                     TaskListviewItem c = new TaskListviewItem();
-                    c.setTask(item);
+                    c.setTask(item.getId());
                     setGraphic(c);
                 }
             };

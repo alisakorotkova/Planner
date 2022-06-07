@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<!--<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">-->
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="570.0" style="-fx-background-color: #F4EBE7 #F4EBE7 #F4EBE7 #F4EBE7;">
          <top>
@@ -32,5 +32,5 @@
          </center>
       </BorderPane>
    </children>
-</HBox>
+<!--</HBox>-->
 </fx:root>

@@ -105,8 +105,9 @@ public class PlannerService {
         Set<Long> ids = new HashSet<>();
 
         Queue<Task> outgoing = new LinkedList<>();
-        outgoing.addAll(getOutgoingTasks(taskId));
-        Task o = getTaskById(taskId);
+        outgoing.add(getTaskById(taskId));
+        //outgoing.addAll(getOutgoingTasks(taskId));
+        Task o;
 
         // if we want to detect cycles and delete them
         // let us save task from which we have found cycle
@@ -114,7 +115,7 @@ public class PlannerService {
 
         while (!outgoing.isEmpty()) {
 
-            Long prevTaskId = o.getId();
+            //Long prevTaskId = o.getId();
             o = outgoing.remove();
 
             if (!ids.contains(o.getId())) {
@@ -142,8 +143,9 @@ public class PlannerService {
         Set<Long> ids = new HashSet<>();
 
         Queue<Task> ingoing = new LinkedList<>();
-        ingoing.addAll(getIngoingTasks(taskId));
-        Task o = getTaskById(taskId);
+        ingoing.add(getTaskById(taskId));
+        //ingoing.addAll(getIngoingTasks(taskId));
+        Task o;
 
         // if we want to detect cycles and delete them
         // let us save task from which we have found cycle
@@ -151,7 +153,6 @@ public class PlannerService {
 
         while (!ingoing.isEmpty()) {
 
-            Long prevTaskId = o.getId();
             o = ingoing.remove();
 
             if (!ids.contains(o.getId())) {
@@ -231,32 +232,32 @@ public class PlannerService {
     //List<Task> tasksGraph = Application.plannerService.getAllTasks();
 
     // служебное поле для запоминания посещенных вершин
-    Map<Task, Boolean> visited;
-    ArrayList<Task> answer;
+    Map<Long, Boolean> visited;
+    ArrayList<Long> answer;
 
     private void dfs(Task v) {
 
-        this.visited.put(v, true);
+        this.visited.put(v.getId(), true);
 
         // Для каждой вершины, исходящей из текущей
         for (Task u : Application.plannerService.getOutgoingTasks(v.getId())) {
             // Не был ли я в этой вершине? Если не был, то пойдем!
-            if (!this.visited.get(u)) {
+            if (!this.visited.get(u.getId())) {
                 dfs(u);
             }
         }
-        answer.add(v);
+        answer.add(v.getId());
     }
 
 
 
-    public ArrayList<Task> topSort() {
+    public List<Long> topSort() {
         System.out.println("TopSorting");
 
         // проинициализируем мой массив посещений (да / нет)
         this.visited = new HashMap<>();
         for (Task u : Application.plannerService.getAllTasks()) {
-            this.visited.put(u, false);
+            this.visited.put(u.getId(), false);
         }
         // у меня получился Map: false, false, ..., false
         this.answer = new ArrayList<>();
@@ -265,13 +266,14 @@ public class PlannerService {
         // Все кусочки, из которых он составлен
         // Поэтому насильно попробую пойти из каждой вершины
         for (Task u : Application.plannerService.getAllTasks()) {
-            if (!this.visited.get(u)) {
+            if (!this.visited.get(u.getId())) {
                 dfs(u);
             }
         }
 
         // в answer хранится ответ в перевернутом виде
-        // Разверну и покажу
+        // Разверну и покаж
+
 
         Collections.reverse(this.answer);
         return this.answer;
