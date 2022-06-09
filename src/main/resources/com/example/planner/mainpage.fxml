@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="387.0" prefWidth="580.0" style="-fx-background-color: #F4EBE7 #F4EBE7 #F4EBE7 #F4EBE7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.planner.gui.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="387.0" prefWidth="578.0" style="-fx-background-color: #F4EBE7 #F4EBE7 #F4EBE7 #F4EBE7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.planner.gui.MainController">
    <top>
-      <Label fx:id="name" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="557.0" style="-fx-background-color: #F4EBE7 #F4EBE7;" text="Планировщик Задач" textFill="#b99ae4" BorderPane.alignment="CENTER">
+      <Label fx:id="name" alignment="CENTER" maxHeight="63.0" maxWidth="1.7976931348623157E308" minHeight="63.0" prefHeight="63.0" style="-fx-background-color: #F4EBE7 #F4EBE7;" text="Планировщик Задач" textFill="#b99ae4" BorderPane.alignment="CENTER">
          <font>
             <Font name="Impact" size="43.0" />
          </font>
@@ -20,13 +20,13 @@
    <center>
       <SplitPane dividerPositions="0.29347826086956524" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <ListView fx:id="listViewVertex" minWidth="300.0" prefHeight="280.0" prefWidth="268.0" style="-fx-background-color: #F4EBE7 #F4EBE7 #F4EBE7 #F4EBE7;" />
-            <HBox fx:id="scenes" prefHeight="246.0" prefWidth="339.0" style="-fx-background-color: #F4EBE7;" />
+            <ListView fx:id="listViewVertex" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="300.0" prefHeight="280.0" prefWidth="300.0" style="-fx-background-color: #F4EBE7 #F4EBE7 #F4EBE7 #F4EBE7;" />
+            <HBox fx:id="scenes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #F4EBE7;" />
          </items>
       </SplitPane>
    </center>
    <bottom>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="55.0" prefWidth="501.0" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" prefHeight="55.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnAddVert" alignment="CENTER" mnemonicParsing="false" onAction="#btnAddVertPressed" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #98b1fc;" text="+ добавить задачу" textAlignment="CENTER" textFill="#2a2a32" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="7.0">
                <font>

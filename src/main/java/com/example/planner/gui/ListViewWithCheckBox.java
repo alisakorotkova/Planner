@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -28,6 +30,8 @@ public class ListViewWithCheckBox extends ListView {
 
         this.forIngoingTasks = forIngoingTasks;
         this.currentTask = currentTask;
+
+        HBox.setHgrow(this, Priority.ALWAYS);
 
         super.setCellFactory(CheckBoxListCell.forListView(new Callback<Item, ObservableValue<Boolean>>() {
             @Override
