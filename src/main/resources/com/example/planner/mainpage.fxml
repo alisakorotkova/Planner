@@ -38,6 +38,11 @@
                   <Font name="Monospaced Bold" size="14.0" />
                </font>
             </Button>
+            <Button fx:id="btnDeleteVert" alignment="CENTER" layoutX="207.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnDeleteVertPressed" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #98b1fc;" text="- удалить задачу" textAlignment="CENTER" textFill="#2a2a32">
+               <font>
+                  <Font name="Monospaced Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </bottom>

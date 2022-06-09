@@ -9,9 +9,6 @@ public class TaskListviewItem extends HBox {
 
 
     public Label labelVertName;
-    public Label labelVertIndex;
-    public Label labelVertIn;
-    public Label labelVertOut;
 
     TaskListviewItem() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("taskBox.fxml"));
@@ -27,18 +24,11 @@ public class TaskListviewItem extends HBox {
 
 
     void setTask(Task task) {
-        //this.labelVertIndex.setText(task.getInd());
-
         this.labelVertName.setText(task.getId() + " " + task.getLabel());
-        //this.labelVertIn.setText(task.getInd());
-        //this.labelVertOut.setText(task.getLabel());
+
     }
 
     void setTask(Long id) {
-        //this.labelVertIndex.setText(task.getInd());
-
         this.labelVertName.setText(id + "");
-        //this.labelVertIn.setText(task.getInd());
-        //this.labelVertOut.setText(task.getLabel());
     }
 }

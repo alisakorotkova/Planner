@@ -29,7 +29,7 @@ public class Application extends javafx.application.Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainpage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 480);
-        stage.setTitle("Hello!");
+        stage.setTitle("Planner");
         stage.setScene(scene);
         stage.show();
     }

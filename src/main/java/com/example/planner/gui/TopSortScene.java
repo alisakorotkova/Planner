@@ -62,27 +62,8 @@ public class TopSortScene extends HBox implements Initializable {
                     setGraphic(c);
                 }
             };
-//            cell.setOnMouseClicked(e -> {
-//                if (!cell.isEmpty()) {
-//                    try {
-//                        Task d = (Task) lvAnswer.getSelectionModel().getSelectedItem();
-//                        this.taskSelected(e, d);
-//                    } catch (IOException ex) {
-//                        ex.printStackTrace();
-//                    }
-//                    e.consume();
-//                }
-//            }
-//            );
             return cell;
         });
     }
-
-
-
-
-
-
-
 }
 

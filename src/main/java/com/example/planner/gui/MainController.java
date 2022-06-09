@@ -4,6 +4,8 @@ import com.example.planner.Application;
 import com.example.planner.planner.PlannerService;
 import com.example.planner.planner.entities.Task;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -31,10 +33,13 @@ public class MainController implements Initializable {
 
 
     public Button btnAddVert;
+    public Button btnDeleteVert;
     public Button btnSort;
     public HBox scenes;
     public ListView listViewVertex;
     public Label name;
+
+    Task selectedTask;
 
     final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
@@ -74,6 +79,14 @@ public class MainController implements Initializable {
             });
             return cell;
         });
+
+        listViewVertex.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Task>() {
+            @Override
+            public void changed(ObservableValue<? extends Task> observable, Task oldValue, Task newValue) {
+                // надо запомнить вершину, которая была выбрана и разблокировать кнопку. при нажатии на кнопку запомненную вершину удалить
+                selectedTask = (Task)listViewVertex.getSelectionModel().getSelectedItem();
+            }
+        });
     }
 
 
@@ -110,6 +123,13 @@ public class MainController implements Initializable {
 //        SubScene scene = new SubScene(fxmlLoader.load(), 130, 220);
 //        HBox.setHgrow(scene, Priority.ALWAYS);
 //        this.scenes.getChildren().add(scene.getRoot());
+    }
+
+    public void btnDeleteVertPressed(ActionEvent actionEvent) throws IOException {
+        System.out.println("btnDeleteVert was pressed");
+        Application.plannerService.deleteTask(selectedTask);
+        initiateUpdate();
+
     }
 
     public void btnSortPressed(ActionEvent actionEvent) throws IOException {

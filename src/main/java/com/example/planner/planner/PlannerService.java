@@ -49,6 +49,10 @@ public class PlannerService {
         return a;
     }
 
+    public void deleteTask (Task t) {
+        this.repository.delete(t);
+    }
+
     public Task getTaskById(Long id) {
         return this.repository.getById(id);
     }

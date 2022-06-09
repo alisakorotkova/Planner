@@ -18,16 +18,11 @@ public class EditTaskScene extends HBox {
     TextField textAddingName;
 
     @FXML
-    HBox hboxEdges;
-
-    @FXML
-    Button btnAdd;
-
-    @FXML
     HBox edgesContainer;
 
-
     String name;
+
+
     public EditTaskScene() {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("vertex.fxml"));
         fxmlLoader.setRoot(this);
@@ -46,12 +41,6 @@ public class EditTaskScene extends HBox {
                 // service ->
             }
         });
-
-//        this.textEdgeFrom.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                textEdgeTo.requestFocus();
-//            }
-//        });
     }
 
     Task currentTask = null;
@@ -71,11 +60,6 @@ public class EditTaskScene extends HBox {
         ListViewWithCheckBox ingoingListView = new ListViewWithCheckBox(true, currentTask);
         this.edgesContainer.getChildren().add(ingoingListView);
 
-
-
-
-
-
     }
 
     public void saveTaskBtnClicked() {
@@ -84,17 +68,15 @@ public class EditTaskScene extends HBox {
         // this.currentTask.setSomething(somethingTextField.getText());
 
         this.currentTask.setLabel(this.textAddingName.getText());
-
-
         Application.plannerService.updateTask(this.currentTask);
 //        Application.plannerService.addTask(this.currentTask);
 
     }
 
     public void addTaskBtnClicked() {
-        this.currentTask.setLabel(this.textAddingName.getText());
-        Application.plannerService.addTask(this.currentTask);
-        Application.plannerService.getAllTasks();
+//        this.currentTask.setLabel(this.textAddingName.getText());
+//        Application.plannerService.addTask(this.currentTask);
+//        Application.plannerService.getAllTasks();
 
     }
 }
@@ -105,7 +87,7 @@ public class EditTaskScene extends HBox {
 
 
 
-// TODO: let us use ComboBox to choose tasks we provide user to choose from
+// ODO: let us use ComboBox to choose tasks we provide user to choose from
 // see https://www.geeksforgeeks.org/javafx-combobox-with-examples/
 
 //        javafx.util.Callback<ListView<Task>, ListCell<Task>> f = new Callback<ListView<Task>, ListCell<Task>>() {
