@@ -54,11 +54,12 @@ public class EditTaskScene extends HBox {
         // TODO: proceed with filling this scene
         this.textAddingName.setText(s.getLabel());
 
+        ListViewWithCheckBox ingoingListView = new ListViewWithCheckBox(true, currentTask);
+        this.edgesContainer.getChildren().add(ingoingListView);
+
         ListViewWithCheckBox outgoingListView = new ListViewWithCheckBox(false, currentTask);
         this.edgesContainer.getChildren().add(outgoingListView);
 
-        ListViewWithCheckBox ingoingListView = new ListViewWithCheckBox(true, currentTask);
-        this.edgesContainer.getChildren().add(ingoingListView);
 
     }
 

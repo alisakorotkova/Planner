@@ -37,7 +37,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        //context.close();
+        context.close();
     }
 
     public static void main(String[] args) {

@@ -248,9 +248,21 @@ public class PlannerService {
             // Не был ли я в этой вершине? Если не был, то пойдем!
             if (!this.visited.get(u.getId())) {
                 dfs(u);
+            } else {
+                System.out.println("цикл");
+                System.out.println(v.getId() + " " + u.getId());
+                System.out.println(Application.plannerService.getTaskById(v.getId()));
+                System.out.println(Application.plannerService.getTaskById(u.getId()));
             }
         }
         answer.add(v.getId());
+
+        /*
+        a -> b
+        b -> c
+        c -> b
+
+         */
     }
 
 

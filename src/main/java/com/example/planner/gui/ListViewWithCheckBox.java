@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,12 +53,14 @@ public class ListViewWithCheckBox extends ListView {
         List<Task> tasks = Application.plannerService.getAllTasks();
         Long currentTaskId = currentTask.getId();
 
-        Set<Long> forbiddenTasks;
-        if (forIngoingTasks) {
-            forbiddenTasks = Application.plannerService.getForbiddenIngoingTasks(currentTaskId);
-        } else {
-            forbiddenTasks = Application.plannerService.getForbiddenOutgoingTasks(currentTaskId);
-        }
+        Set<Long> forbiddenTasks = new HashSet<>();
+
+        // функционал поиска циклов выключен
+//        if (forIngoingTasks) {
+//            forbiddenTasks = Application.plannerService.getForbiddenIngoingTasks(currentTaskId);
+//        } else {
+//            forbiddenTasks = Application.plannerService.getForbiddenOutgoingTasks(currentTaskId);
+//        }
 
         for (int i = 0; i < tasks.size(); i++) {
 
