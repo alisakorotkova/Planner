@@ -23,7 +23,7 @@ public class TopSortScene extends HBox implements Initializable {
 
 
     public TopSortScene() {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("topsorting.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("topsorting.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {

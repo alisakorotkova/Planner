@@ -50,6 +50,13 @@ public class PlannerService {
     }
 
     public void deleteTask (Task t) {
+        for (TaskEdge e : getIngoingTaskEdges(t.getId())) {
+            this.edgeRepository.delete(e);
+        }
+        for (TaskEdge e : getOutgoingTaskEdges(t.getId())) {
+            this.edgeRepository.delete(e);
+        }
+
         this.repository.delete(t);
     }
 
@@ -141,7 +148,6 @@ public class PlannerService {
 
     public Set<Long> getForbiddenOutgoingTasks(Long taskId) {
 
-
         // TODO: перепиши аналогично, заменяя аутгоинг на ингоинг
 
         Set<Long> ids = new HashSet<>();
@@ -161,12 +167,16 @@ public class PlannerService {
 
             if (!ids.contains(o.getId())) {
                 ids.add(o.getId());
+
                 for (Task t : getIngoingTasks(o.getId())) {
+                    System.out.println(t.getId());
                     ingoing.add(t);
                     cycleSources.put(t.getId(), o.getId());
                 }
             } else {
                 // Cycle situation
+
+                System.out.println(cycleSources.get(o.getId()) + " / " + o.getId());
                 removeIngoingTask(cycleSources.get(o.getId()), o.getId());
                 //throw new RuntimeException("Congrats! There is a cycle.");
             }
@@ -209,7 +219,7 @@ public class PlannerService {
     public List<Task> getIngoingTasks(Long taskId) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (TaskEdge e : Application.plannerService.getIngoingTaskEdges(taskId)) {
-            tasks.add(e.getTargetTask());
+            tasks.add(e.getSourceTask());
         }
         return tasks;
     }
@@ -249,10 +259,11 @@ public class PlannerService {
             if (!this.visited.get(u.getId())) {
                 dfs(u);
             } else {
+                //throw new Exception("цикл между ...");
                 System.out.println("цикл");
                 System.out.println(v.getId() + " " + u.getId());
-                System.out.println(Application.plannerService.getTaskById(v.getId()));
-                System.out.println(Application.plannerService.getTaskById(u.getId()));
+                System.out.println(Application.plannerService.getTaskById(v.getId()).getLabel());
+                System.out.println(Application.plannerService.getTaskById(u.getId()).getLabel());
             }
         }
         answer.add(v.getId());

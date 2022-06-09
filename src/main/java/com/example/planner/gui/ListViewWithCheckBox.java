@@ -56,11 +56,13 @@ public class ListViewWithCheckBox extends ListView {
         Set<Long> forbiddenTasks = new HashSet<>();
 
         // функционал поиска циклов выключен
-//        if (forIngoingTasks) {
-//            forbiddenTasks = Application.plannerService.getForbiddenIngoingTasks(currentTaskId);
-//        } else {
-//            forbiddenTasks = Application.plannerService.getForbiddenOutgoingTasks(currentTaskId);
-//        }
+        if (Application.RESTRICT_CYCLES) {
+            if (forIngoingTasks) {
+                forbiddenTasks = Application.plannerService.getForbiddenIngoingTasks(currentTaskId);
+            } else {
+                forbiddenTasks = Application.plannerService.getForbiddenOutgoingTasks(currentTaskId);
+            }
+        }
 
         for (int i = 0; i < tasks.size(); i++) {
 
