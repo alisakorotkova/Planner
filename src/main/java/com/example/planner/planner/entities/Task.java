@@ -44,40 +44,5 @@ public class Task {
     public void setLabel(String label) {
         this.label = label;
     }
-
-    
-
-
-
-
-
-//    public Task() {
-//        this.ingoingTaskEdges = new ArrayList<>();
-//        this.outgoingTaskEdges = new ArrayList<>();
-//    }
-
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sourceTask")
-//    //@Fetch(value = FetchMode.SUBSELECT)
-//    public List<TaskEdge> outgoingTaskEdges;
-//
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "targetTask")
-//    public List<TaskEdge> ingoingTaskEdges;
-
-//    List<Task> getIngoingTasks() {
-//        ArrayList<Task> r = new ArrayList<>();
-//        for (TaskEdge e : this.ingoingTaskEdges) {
-//            r.add(e.getTargetTask());
-//        }
-//        return r;
-//    }
-//
-//    List<Task> getOutgoingTasks() {
-//        ArrayList<Task> r = new ArrayList<>();
-//        for (TaskEdge e : this.outgoingTaskEdges) {
-//            r.add(e.getSourceTask());
-//        }
-//        return r;
-//    }
-
 }
 

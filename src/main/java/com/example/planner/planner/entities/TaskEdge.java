@@ -21,14 +21,9 @@ public class TaskEdge {
         this.targetTaskId = targetId;
     }
 
-    //@ManyToOne(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "source_id")
+
     private Long sourceTaskId;
-
-    //@ManyToOne(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "target_id")
     private Long targetTaskId;
-
 
     public Task getSourceTask() {
         return Application.plannerService.getTaskById(sourceTaskId);

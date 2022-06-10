@@ -20,7 +20,7 @@ public class Application extends javafx.application.Application {
 
     private static ConfigurableApplicationContext context;
 
-    public static boolean RESTRICT_CYCLES = false;
+    public static boolean RESTRICT_CYCLES = true;
 
     @Override
     public void start(Stage stage) throws IOException {

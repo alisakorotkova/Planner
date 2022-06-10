@@ -83,22 +83,17 @@ public class MainController implements Initializable {
         listViewVertex.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Task>() {
             @Override
             public void changed(ObservableValue<? extends Task> observable, Task oldValue, Task newValue) {
-                // надо запомнить вершину, которая была выбрана и разблокировать кнопку. при нажатии на кнопку запомненную вершину удалить
                 selectedTask = (Task)listViewVertex.getSelectionModel().getSelectedItem();
             }
         });
     }
 
 
-    // TODO: сохраним Scene, которую мы прямо сейчас редактируем, чтобы
-    // ее можно было обновить или сохранить
+    // --------------------------------
 
     EditTaskScene currentEditTaskScene = null;
 
     public void taskSelected(MouseEvent mouseEvent, Task selectedItem) throws IOException {
-
-        // if we long to save currently edited Task, we do it here
-
         EditTaskScene card = new EditTaskScene();
         this.currentEditTaskScene = card;
         card.setEditTask(selectedItem);
@@ -113,68 +108,24 @@ public class MainController implements Initializable {
         initiateUpdate();
         this.taskSelected(null, t);
 
-
-        //this.tasks.add(new Task(8));
-//        Task t = this.plannerService.addTask();
-//        this.tasks.add(t);
-
-//        this.scenes.getChildren().clear();
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("vertex.fxml"));
-//        SubScene scene = new SubScene(fxmlLoader.load(), 130, 220);
-//        HBox.setHgrow(scene, Priority.ALWAYS);
-//        this.scenes.getChildren().add(scene.getRoot());
     }
 
     public void btnDeleteVertPressed(ActionEvent actionEvent) throws IOException {
         System.out.println("btnDeleteVert was pressed");
         Application.plannerService.deleteTask(selectedTask);
         initiateUpdate();
-
     }
 
     public void btnSortPressed(ActionEvent actionEvent) throws IOException {
         System.out.println("btnSort was pressed");
         this.scenes.getChildren().clear();
-        //FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("topsorting.fxml"));
         SubScene scene = new SubScene(new TopSortScene(), 130, 220);
         HBox.setHgrow(scene, Priority.ALWAYS);
         this.scenes.getChildren().add(scene.getRoot());
     }
 
     public void initiateUpdate() {
-
         tasks.clear();
         tasks.addAll(Application.plannerService.getAllTasks());
-
-//        Platform.runLater(() -> {
-//            //listViewVertex.getItems().clear();
-//
-//            listViewVertex.refresh();
-//            listViewVertex.setItems(FXCollections.observableArrayList());
-//
-//            Platform.runLater(() -> {
-//                listViewVertex.setItems(tasks);
-//
-//            });
-//
-//
-//        });
-//
-//        Thread thread = new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//
-//
-//
-//
-//            }
-//
-//        });
-//        // don't let thread prevent JVM shutdown
-//        thread.start();
-
-
-
     }
 }

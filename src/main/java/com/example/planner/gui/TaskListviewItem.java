@@ -25,7 +25,6 @@ public class TaskListviewItem extends HBox {
 
     void setTask(Task task) {
         this.labelVertName.setText(task.getId() + " " + task.getLabel());
-
     }
 
     void setTask(Long id) {

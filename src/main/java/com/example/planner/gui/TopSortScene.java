@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
@@ -21,6 +22,9 @@ public class TopSortScene extends HBox implements Initializable {
     @FXML
     ListView lvAnswer;
 
+    @FXML
+    Label labelN;
+
 
     public TopSortScene() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("topsorting.fxml"));
@@ -33,19 +37,26 @@ public class TopSortScene extends HBox implements Initializable {
         }
     }
 
-    final ObservableList<Task> tasksTS = FXCollections.observableArrayList();
 
+
+    final ObservableList<Task> tasksTS = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Application.plannerService.notifyControllerTS(this);
 
-        this.lvAnswer.setItems(tasksTS);
-        List<Long> ids = Application.plannerService.topSort();
-        for (Long id : ids) {
-            this.tasksTS.add(Application.plannerService.getTaskById(id));
+        try {
+            this.lvAnswer.setItems(tasksTS);
+            List<Long> ids = Application.plannerService.topSort();
+            for (Long id : ids) {
+                this.tasksTS.add(Application.plannerService.getTaskById(id));
+            }
+        } catch(Exception e){
+            this.labelN.setText(e.getMessage());
+
         }
+
 
 
         this.lvAnswer.setCellFactory(lv -> {

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
 <!--<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">-->
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="570.0" style="-fx-background-color: #F4EBE7 #F4EBE7 #F4EBE7 #F4EBE7;">
@@ -21,7 +21,7 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="labelN" layoutX="112.0" layoutY="14.0" prefHeight="25.0" prefWidth="377.0" text="Возможный порядок выполнения задач" textAlignment="CENTER" textFill="#2a2a32" AnchorPane.bottomAnchor="256.0" AnchorPane.leftAnchor="112.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="labelN" layoutX="112.0" layoutY="14.0" prefHeight="25.0" prefWidth="377.0" text="Возможный порядок выполнения задач" textAlignment="CENTER" textFill="#2a2a32" AnchorPane.bottomAnchor="256.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Monospaced Bold" size="18.0" />
                      </font>

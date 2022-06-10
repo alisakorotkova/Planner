@@ -1,7 +1,5 @@
 package com.example.planner.planner;
 
-//import com.example.planner.planner.entities.Graph;
-
 import com.example.planner.Application;
 import com.example.planner.gui.MainController;
 import com.example.planner.gui.TopSortScene;
@@ -22,18 +20,9 @@ public class PlannerService {
     @Autowired
     private TaskEdgeRepository edgeRepository;
 
-//    Map<Long, Task> tasks = new HashMap<>();
-
     public PlannerService() {
-//        List<Task> tasks = this.repository.findAll();
-//        for (Task t : tasks) {
-//            this.tasks.put(t.getId(), t);
-//        }
     }
 
-    public void save() {
-//        this.repository.saveAll(tasks.values());
-    }
 
     public List<Task> getAllTasks() {
         return this.repository.findAll();
@@ -95,7 +84,7 @@ public class PlannerService {
     }
 
     /*
-    TODO: мы хотим знать, какие вершины надо запретить соединять ребрами,
+    мы хотим знать, какие вершины надо запретить соединять ребрами,
     чтобы не получился цикл, который нам совершенно не нужен
 
     Какие же это вершины?
@@ -147,8 +136,6 @@ public class PlannerService {
     }
 
     public Set<Long> getForbiddenOutgoingTasks(Long taskId) {
-
-        // TODO: перепиши аналогично, заменяя аутгоинг на ингоинг
 
         Set<Long> ids = new HashSet<>();
 
@@ -232,10 +219,6 @@ public class PlannerService {
         return tasks;
     }
 
-//    public List<Task> topSorting(List<Task> a){
-//
-//        return
-//    }
 
 
 
@@ -243,13 +226,11 @@ public class PlannerService {
 
     // --------------------------------
 
-    //List<Task> tasksGraph = Application.plannerService.getAllTasks();
-
     // служебное поле для запоминания посещенных вершин
     Map<Long, Boolean> visited;
     ArrayList<Long> answer;
 
-    private void dfs(Task v) {
+    private void dfs(Task v) throws Exception {
 
         this.visited.put(v.getId(), true);
 
@@ -259,26 +240,19 @@ public class PlannerService {
             if (!this.visited.get(u.getId())) {
                 dfs(u);
             } else {
-                //throw new Exception("цикл между ...");
                 System.out.println("цикл");
                 System.out.println(v.getId() + " " + u.getId());
                 System.out.println(Application.plannerService.getTaskById(v.getId()).getLabel());
                 System.out.println(Application.plannerService.getTaskById(u.getId()).getLabel());
+                throw new Exception("Был найден цикл между задачами " + v.getId() + " и " + u.getId());
             }
         }
         answer.add(v.getId());
-
-        /*
-        a -> b
-        b -> c
-        c -> b
-
-         */
     }
 
 
 
-    public List<Long> topSort() {
+    public List<Long> topSort() throws Exception{
         System.out.println("TopSorting");
 
         // проинициализируем мой массив посещений (да / нет)
@@ -299,7 +273,7 @@ public class PlannerService {
         }
 
         // в answer хранится ответ в перевернутом виде
-        // Разверну и покаж
+        // Разверну и покажу
 
 
         Collections.reverse(this.answer);

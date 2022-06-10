@@ -46,10 +46,6 @@ public class ListViewWithCheckBox extends ListView {
 
     private Task currentTask;
 
-    //public void setCurrentTask(Task t) {
-//        this.currentTask = t;
-//    }
-
     public void update() {
 
         this.getItems().clear();
@@ -102,7 +98,6 @@ public class ListViewWithCheckBox extends ListView {
                 }
 
                 update();
-                //Application.plannerService.updateTask(this.currentTask);
 
             });
 
