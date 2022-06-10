@@ -229,18 +229,23 @@ public class PlannerService {
 
     // служебное поле для запоминания посещенных вершин
     Map<Long, Boolean> visited;
+    Map<Long, Integer> paint;
     ArrayList<Long> answer;
 
     private void dfs(Task v) throws Exception {
 
         this.visited.put(v.getId(), true);
+        this.paint.put(v.getId(), 1);
 
         // Для каждой вершины, исходящей из текущей
         for (Task u : Application.plannerService.getOutgoingTasks(v.getId())) {
             // Не был ли я в этой вершине? Если не был, то пойдем!
             if (!this.visited.get(u.getId())) {
                 dfs(u);
-            } else {
+            }
+
+            if (this.paint.get(u.getId()) == 1){
+
                 System.out.println("цикл");
                 System.out.println(v.getId() + " " + u.getId());
                 System.out.println(Application.plannerService.getTaskById(v.getId()).getLabel());
@@ -248,6 +253,8 @@ public class PlannerService {
                 throw new Exception("Был найден цикл между задачами " + v.getId() + " и " + u.getId());
             }
         }
+
+        this.paint.put(v.getId(), 2);
         answer.add(v.getId());
     }
 
@@ -258,8 +265,10 @@ public class PlannerService {
 
         // проинициализируем мой массив посещений (да / нет)
         this.visited = new HashMap<>();
+        this.paint = new HashMap<>();
         for (Task u : Application.plannerService.getAllTasks()) {
             this.visited.put(u.getId(), false);
+            this.paint.put(u.getId(), 0);
         }
         // у меня получился Map: false, false, ..., false
         this.answer = new ArrayList<>();

@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -12,13 +32,13 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.h2database:h2:1.4.200" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac-aarch64:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:18.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac-aarch64:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:18.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac-aarch64:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:18.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac-aarch64:18.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:18.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
