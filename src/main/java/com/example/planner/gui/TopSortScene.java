@@ -69,7 +69,8 @@ public class TopSortScene extends HBox implements Initializable {
                         return;
                     }
                     TaskListviewItem c = new TaskListviewItem();
-                    c.setTask(item.getId());
+                    c.setTask(item);
+                    //c.setTask(item.getId());
                     setGraphic(c);
                 }
             };
