@@ -22,6 +22,7 @@ public class TaskEdge {
     }
 
 
+
     private Long sourceTaskId;
     private Long targetTaskId;
 

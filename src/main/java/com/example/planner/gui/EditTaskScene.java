@@ -49,7 +49,6 @@ public class EditTaskScene extends HBox {
         // we are going to save Task to be able to update it later
         this.currentTask = s;
         //s.setLabel(this.name);
-
         this.textAddingName.setText(s.getLabel());
 
         ListViewWithCheckBox ingoingListView = new ListViewWithCheckBox(true, currentTask);

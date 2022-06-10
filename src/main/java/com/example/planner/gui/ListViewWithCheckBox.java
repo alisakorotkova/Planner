@@ -105,6 +105,7 @@ public class ListViewWithCheckBox extends ListView {
         }
     }
 
+
     public static class Item {
         private final StringProperty name = new SimpleStringProperty();
         private final BooleanProperty on = new SimpleBooleanProperty();

@@ -22,6 +22,7 @@ public class Application extends javafx.application.Application {
 
     public static boolean RESTRICT_CYCLES = true;
 
+
     @Override
     public void start(Stage stage) throws IOException {
 
